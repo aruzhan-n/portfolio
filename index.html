@@ -387,8 +387,8 @@
 
   <header class="masthead">
     <div class="role">
-      <span class="t-en">AI Engineer · Solutions Architect</span>
-      <span class="t-ru">AI-инженер · архитектор решений</span>
+      <span class="t-en">AI Engineer · AI Engineering Lead</span>
+      <span class="t-ru">AI-инженер · лид AI-разработки</span>
     </div>
     <h1>
       <span class="t-en">Aruzhan Nugmanova</span>
@@ -1108,36 +1108,40 @@
         <div class="cv-job">
           <div class="cv-job-head">
             <div class="cv-title">
-              <span class="t-en">AI Product Owner / AI Engineer</span>
-              <span class="t-ru">AI Product Owner / AI-инженер</span>
+              <span class="t-en">AI Engineer / AI Product Owner</span>
+              <span class="t-ru">AI-инженер / AI Product Owner</span>
             </div>
             <div class="cv-dates">
               <span class="t-en">Aug 2025 — May 2026</span><span class="t-ru">авг 2025 — май 2026</span>
             </div>
           </div>
           <div class="cv-company">
-            <span class="t-en">Cybernet AI — B2B AI platform for call centres; telecom and fintech clients across Central Asia, LATAM and the Middle East</span>
-            <span class="t-ru">Cybernet AI — B2B AI-платформа для колл-центров; клиенты в телекоме и финтехе — Центральная Азия, Латинская Америка, Ближний Восток</span>
+            <span class="t-en">Cybernet AI — B2B Voice AI platform for banks, telecom and fintech companies across Central Asia, LATAM, the Middle East and USA</span>
+            <span class="t-ru">Cybernet AI — B2B Voice AI-платформа для банков, телеком- и финтех-компаний в Центральной Азии, Латинской Америке, на Ближнем Востоке и в США</span>
           </div>
           <ul class="cv-list t-en">
-            <li>Led a team of four (full-stack, backend, systems analyst, project manager) plus two QA leads and ML engineers from adjacent teams. Owned architecture, roadmap and delivery.</li>
-            <li>Built an AI product that listens to customer calls and turns them into structured data: what was discussed, how the operator performed, what the client wanted. Launched in one month, grew to millions of calls.</li>
-            <li>Built a search system that finds the right call by meaning and by exact match at the same time (hybrid retrieval: BGE-M3, Qdrant + OpenSearch, RRF fusion, LLM reranking).</li>
-            <li>Set the quality bar for AI answers so the system does not invent facts: test sets with known correct answers, an LLM checking other LLM answers, and a rule to say "I don't know" when confidence is low. Nothing shipped without passing evaluation.</li>
-            <li>Chose the speech recognition engine by measurement, not vendor claims: tested several engines against hand-annotated reference recordings in six language pairs (KZ-RU, KG-RU, UZ-RU, EN-ES, EN, ES).</li>
-            <li>Sent analysis results into client CRM systems — call outcome, lead score, extracted fields — so the sales team works with them daily instead of opening a dashboard.</li>
-            <li>Lifted telemarketing conversion for clients: +14% (NDA telecom), +7% (Kcell), +2% (NDA telecom ML).</li>
-            <li>Flagship case: processed 200K+ dialogues in 4 hours, wrote results back to the client CRM, reached 7% conversion on a pay-per-conversion contract.</li>
+            <li>Launched an MVP in one month using AI-assisted development (Claude Code) and scaled it into a platform that analyzed millions of calls; validated product-market fit and ran competitor research.</li>
+            <li>Designed the end-to-end AI solution architecture: a multi-stage LLM agent pipeline, custom RAG over Qdrant with BGE hybrid embeddings, a FastAPI backend, and async workers.</li>
+            <li>Built an evaluation and guardrail layer (PII stripping before the LLM, automated retries on empty responses) with latency and failures traced via OpenTelemetry.</li>
+            <li>Benchmarked embedding models and chunking strategies against a hand-curated golden dataset stratified by difficulty, tracking retrieval quality and latency.</li>
+            <li>Built and measured the speech-to-text layer: evaluated and integrated multiple ASR engines against hand-annotated golden datasets across six language pairs (KZ-RU, KG-RU, UZ-RU, EN-ES, EN, ES), selecting engine and configuration on measured accuracy rather than vendor claims.</li>
+            <li>Owned the product roadmap, defined acceptance criteria, designed UI/UX prototypes, and improved client onboarding.</li>
+            <li>Lifted telemarketing conversion for clients: +14% (Beeline), +7% (Kcell).</li>
+            <li>Flagship case: ran 200K+ dialogues through the LLM pipeline in 4 hours, wrote results back to the client's CRM, on a pay-per-conversion contract.</li>
+            <li>Integrated analytics output into client CRM systems: call outcomes, scores and extracted fields landed as structured records sales teams work with daily, rather than a dashboard nobody opens.</li>
+            <li>Led a cross-functional team of four — full-stack, backend, systems analyst and project manager — and coordinated two QA leads and ML engineers across adjacent teams.</li>
           </ul>
           <ul class="cv-list t-ru">
-            <li>Вела команду из четырёх человек (фулстек, бэкенд, системный аналитик, проджект) плюс двух тимлидов тестирования и ML-инженеров из смежных команд. Отвечала за архитектуру, дорожную карту и поставку.</li>
-            <li>Построила AI-продукт, который слушает звонки клиентов и превращает их в структурированные данные: что обсуждали, как отработал оператор, чего хотел клиент. Запуск за месяц, дальше — миллионы звонков.</li>
-            <li>Сделала поиск, который находит нужный звонок по смыслу и по точному совпадению одновременно (гибридный поиск: BGE-M3, Qdrant + OpenSearch, RRF-фьюжн, LLM-реранкинг).</li>
-            <li>Задала планку качества AI-ответов, чтобы система не выдумывала факты: эталонные наборы с известными ответами, LLM, проверяющая ответы другой LLM, и правило говорить «не знаю» при низкой уверенности. Ничего не выкатывалось без прохождения проверок.</li>
-            <li>Выбрала движок распознавания речи замером, а не по обещаниям вендора: сравнила несколько движков на размеченных вручную эталонных записях в шести языковых парах (каз-рус, кырг-рус, узб-рус, англ-исп, англ, исп).</li>
-            <li>Отправляла результаты анализа в CRM клиентов — исход звонка, оценка лида, извлечённые поля — чтобы отдел продаж работал с ними ежедневно, а не открывал дашборд.</li>
-            <li>Подняла конверсию телемаркетинга у клиентов: +14% (телеком под NDA), +7% (Kcell), +2% (телеком под NDA, ML).</li>
-            <li>Флагманский кейс: обработала 200K+ диалогов за 4 часа, записала результаты обратно в CRM клиента, вышла на 7% конверсии по контракту с оплатой за конверсию.</li>
+            <li>Запустила MVP за месяц на AI-ассистированной разработке (Claude Code) и вырастила его в платформу, которая проанализировала миллионы звонков; подтвердила product-market fit и провела анализ конкурентов.</li>
+            <li>Спроектировала сквозную архитектуру AI-решения: многоэтапный пайплайн LLM-агентов, собственный RAG поверх Qdrant с гибридными эмбеддингами BGE, бэкенд на FastAPI и асинхронные воркеры.</li>
+            <li>Собрала слой оценки качества и защиты: вырезание персональных данных до отправки в LLM, автоматические ретраи на пустых ответах; задержки и сбои отслеживались через OpenTelemetry.</li>
+            <li>Сравнила модели эмбеддингов и стратегии чанкинга на golden dataset, собранном вручную и стратифицированном по сложности, — с замером качества поиска и задержки.</li>
+            <li>Построила и измерила слой распознавания речи: сравнила и внедрила несколько ASR-движков на размеченных вручную golden datasets в шести языковых парах (каз-рус, кырг-рус, узб-рус, англ-исп, англ, исп), выбирая движок и конфигурацию по измеренной точности, а не по обещаниям вендора.</li>
+            <li>Отвечала за продуктовую дорожную карту, писала критерии приёмки, проектировала UI/UX-прототипы и улучшила онбординг клиентов.</li>
+            <li>Подняла конверсию телемаркетинга у клиентов: +14% (Beeline), +7% (Kcell).</li>
+            <li>Флагманский кейс: прогнала 200K+ диалогов через LLM-пайплайн за 4 часа, записала результаты обратно в CRM клиента, по контракту с оплатой за конверсию.</li>
+            <li>Встроила результаты анализа в CRM клиентов: исход звонка, оценки и извлечённые поля попадали туда структурированными записями, с которыми отдел продаж работает ежедневно, а не дашбордом, который никто не открывает.</li>
+            <li>Вела кросс-функциональную команду из четырёх человек — фулстек, бэкенд, системный аналитик и проджект-менеджер — и координировала двух тимлидов тестирования и ML-инженеров из смежных команд.</li>
           </ul>
         </div>
 
