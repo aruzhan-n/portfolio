@@ -285,6 +285,40 @@
 
   figcaption { font-size: .85rem; color: var(--muted); max-width: 62ch; }
 
+  /* ---------- architecture diagrams ---------- */
+
+  .frame--diagram {
+    background: var(--ground);
+    box-shadow: none;
+    padding: 18px 16px;
+  }
+
+  .frame--diagram svg {
+    display: block;
+    width: 100%;
+    min-width: 620px;
+    height: auto;
+    font-family: var(--sans);
+  }
+
+  .dgm-box { fill: var(--surface); stroke: var(--rule); stroke-width: 1; }
+  .dgm-box--accent { stroke: var(--accent); }
+  .dgm-box--ghost { fill: none; stroke: var(--rule); stroke-dasharray: 4 4; }
+  .dgm-t { fill: var(--ink); font-size: 12.5px; }
+  .dgm-s { fill: var(--muted); font-size: 11px; }
+  .dgm-f { fill: var(--faint); font-size: 11px; }
+  .dgm-k { fill: var(--faint); font-size: 10px; font-family: var(--mono); letter-spacing: .07em; }
+  .dgm-n { font-size: 12px; font-family: var(--mono); }
+  .dgm-lab { font-size: 10px; fill: var(--muted); }
+  .dgm-l { fill: none; stroke: currentColor; stroke-opacity: .5; stroke-width: 1.2; }
+  .dgm-l--accent { stroke: var(--accent); stroke-opacity: .9; }
+  .dgm-l--good { stroke: var(--verified); stroke-opacity: .9; }
+  .dgm-l--bad { stroke: var(--refuted); stroke-opacity: .9; }
+  .dgm-l--ghost { stroke: currentColor; stroke-opacity: .3; stroke-dasharray: 4 4; }
+  .dgm-good { fill: var(--verified); }
+  .dgm-bad { fill: var(--refuted); }
+  .dgm-acc { fill: var(--accent); }
+
   .principles {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -537,6 +571,342 @@
           </div>
         </div>
 
+        <figure class="t-en">
+         <div class="frame frame--diagram">
+          <svg viewBox="0 0 880 460" role="img" aria-label="Architecture: each call is transcribed and answered against the client's own questions; every answer either reuses a label from the registry or creates one, so themes emerge from the corpus instead of being defined in advance.">
+          <defs>
+           <marker id="ar0en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor" fill-opacity=".5"/></marker>
+           <marker id="aa0en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--accent)"/></marker>
+           <marker id="ag0en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--verified)"/></marker>
+           <marker id="ab0en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--refuted)"/></marker>
+          </defs>
+
+          <rect class="dgm-box" x="520" y="8" width="200" height="48" rx="3"/>
+          <text class="dgm-t" x="620" y="32" text-anchor="middle">The client&#8217;s own questions</text>
+          <text class="dgm-s" x="620" y="49" text-anchor="middle">versioned, not edited in place</text>
+          <line class="dgm-l" x1="620" y1="56" x2="620" y2="66" marker-end="url(#ar0en)"/>
+
+          <rect class="dgm-box" x="20" y="70" width="120" height="48" rx="3"/>
+          <text class="dgm-t" x="80" y="99" text-anchor="middle">Call audio</text>
+          <line class="dgm-l" x1="140" y1="94" x2="164" y2="94" marker-end="url(#ar0en)"/>
+
+          <rect class="dgm-box" x="170" y="70" width="150" height="48" rx="3"/>
+          <text class="dgm-t" x="245" y="92" text-anchor="middle">Transcription</text>
+          <text class="dgm-s" x="245" y="109" text-anchor="middle">engine chosen per language</text>
+          <line class="dgm-l" x1="320" y1="94" x2="344" y2="94" marker-end="url(#ar0en)"/>
+
+          <rect class="dgm-box" x="350" y="70" width="140" height="48" rx="3"/>
+          <text class="dgm-t" x="420" y="92" text-anchor="middle">Tokens and lemmas</text>
+          <text class="dgm-s" x="420" y="109" text-anchor="middle">for exact search</text>
+          <line class="dgm-l" x1="490" y1="94" x2="514" y2="94" marker-end="url(#ar0en)"/>
+
+          <rect class="dgm-box dgm-box--accent" x="520" y="70" width="200" height="48" rx="3"/>
+          <text class="dgm-t" x="620" y="92" text-anchor="middle">LLM analysis</text>
+          <text class="dgm-s" x="620" y="109" text-anchor="middle">one answer per question</text>
+          <text class="dgm-n dgm-f" x="520" y="138">&#183; per-question retrieval inside the call</text>
+          <text class="dgm-n dgm-f" x="520" y="155">&#183; answer cites the turns it came from</text>
+
+          <path class="dgm-l" d="M720 94 H860 V180 H60 V190" marker-end="url(#ar0en)"/>
+
+          <rect class="dgm-box dgm-box--accent" x="20" y="196" width="190" height="56" rx="3"/>
+          <text class="dgm-t" x="115" y="222" text-anchor="middle">Label resolution</text>
+          <text class="dgm-s" x="115" y="239" text-anchor="middle">reuse one or create it</text>
+          <text class="dgm-n dgm-f" x="20" y="274">&#183; batched: 50 calls or 5 seconds</text>
+          <line class="dgm-l" x1="210" y1="224" x2="244" y2="224" marker-end="url(#ar0en)"/>
+
+          <rect class="dgm-box dgm-box--accent" x="250" y="196" width="200" height="56" rx="3"/>
+          <text class="dgm-t" x="350" y="222" text-anchor="middle">Registry compaction</text>
+          <text class="dgm-s" x="350" y="239" text-anchor="middle">merges duplicates and synonyms</text>
+          <line class="dgm-l" x1="450" y1="224" x2="484" y2="224" marker-end="url(#ar0en)"/>
+
+          <rect class="dgm-box" x="490" y="196" width="180" height="56" rx="3"/>
+          <text class="dgm-t" x="580" y="222" text-anchor="middle">Checklist scoring</text>
+          <text class="dgm-s" x="580" y="239" text-anchor="middle">weighted, with a threshold</text>
+          <line class="dgm-l" x1="670" y1="224" x2="704" y2="224" marker-end="url(#ar0en)"/>
+
+          <rect class="dgm-box" x="710" y="196" width="150" height="56" rx="3"/>
+          <text class="dgm-t" x="785" y="222" text-anchor="middle">ClickHouse</text>
+          <text class="dgm-s" x="785" y="239" text-anchor="middle">aggregates per theme</text>
+
+          <path class="dgm-l dgm-l--accent" d="M350 252 V280 H410 V294" marker-end="url(#aa0en)"/>
+          <rect class="dgm-box dgm-box--accent" x="290" y="300" width="240" height="48" rx="3"/>
+          <text class="dgm-t" x="410" y="322" text-anchor="middle">A theme is a label</text>
+          <text class="dgm-s" x="410" y="339" text-anchor="middle">nobody defined the list</text>
+
+          <path class="dgm-l" d="M410 348 V366 H210 V380" marker-end="url(#ar0en)"/>
+          <rect class="dgm-box" x="60" y="386" width="300" height="58" rx="3"/>
+          <text class="dgm-t" x="210" y="412" text-anchor="middle">What works, what breaks, what to change</text>
+          <text class="dgm-s" x="210" y="429" text-anchor="middle">from the theme&#8217;s own calls, with examples</text>
+
+          <path class="dgm-l" d="M785 252 V366 H710 V380" marker-end="url(#ar0en)"/>
+          <rect class="dgm-box" x="560" y="386" width="300" height="58" rx="3"/>
+          <text class="dgm-t" x="710" y="412" text-anchor="middle">Volume, share, trend</text>
+          <text class="dgm-s" x="710" y="429" text-anchor="middle">and the share of successful calls</text>
+          </svg>
+         </div>
+         <figcaption>No list of themes exists in advance. The client asks its own questions, the model answers them call by call against fragments retrieved from that call, and each answer either reuses a label or creates one — the registry grows out of the corpus and compaction merges what turns out to be the same thing. A theme then carries both its numbers and findings generated from its own calls, each backed by examples that can be pulled up.</figcaption>
+        </figure>
+        <figure class="t-ru">
+         <div class="frame frame--diagram">
+          <svg viewBox="0 0 880 460" role="img" aria-label="Архитектура: каждый звонок расшифровывается и отвечает на вопросы клиента; любой ответ либо переиспользует метку из реестра, либо создаёт новую, поэтому темы вырастают из корпуса, а не задаются заранее.">
+          <defs>
+           <marker id="ar0ru" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor" fill-opacity=".5"/></marker>
+           <marker id="aa0ru" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--accent)"/></marker>
+           <marker id="ag0ru" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--verified)"/></marker>
+           <marker id="ab0ru" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--refuted)"/></marker>
+          </defs>
+
+          <rect class="dgm-box" x="520" y="8" width="200" height="48" rx="3"/>
+          <text class="dgm-t" x="620" y="32" text-anchor="middle">Вопросы клиента</text>
+          <text class="dgm-s" x="620" y="49" text-anchor="middle">версионные, не правятся на месте</text>
+          <line class="dgm-l" x1="620" y1="56" x2="620" y2="66" marker-end="url(#ar0ru)"/>
+
+          <rect class="dgm-box" x="20" y="70" width="120" height="48" rx="3"/>
+          <text class="dgm-t" x="80" y="99" text-anchor="middle">Аудио звонка</text>
+          <line class="dgm-l" x1="140" y1="94" x2="164" y2="94" marker-end="url(#ar0ru)"/>
+
+          <rect class="dgm-box" x="170" y="70" width="150" height="48" rx="3"/>
+          <text class="dgm-t" x="245" y="92" text-anchor="middle">Расшифровка</text>
+          <text class="dgm-s" x="245" y="109" text-anchor="middle">движок выбран под язык</text>
+          <line class="dgm-l" x1="320" y1="94" x2="344" y2="94" marker-end="url(#ar0ru)"/>
+
+          <rect class="dgm-box" x="350" y="70" width="140" height="48" rx="3"/>
+          <text class="dgm-t" x="420" y="92" text-anchor="middle">Токены и леммы</text>
+          <text class="dgm-s" x="420" y="109" text-anchor="middle">для точного поиска</text>
+          <line class="dgm-l" x1="490" y1="94" x2="514" y2="94" marker-end="url(#ar0ru)"/>
+
+          <rect class="dgm-box dgm-box--accent" x="520" y="70" width="200" height="48" rx="3"/>
+          <text class="dgm-t" x="620" y="92" text-anchor="middle">LLM-анализ</text>
+          <text class="dgm-s" x="620" y="109" text-anchor="middle">ответ на каждый вопрос</text>
+          <text class="dgm-n dgm-f" x="520" y="138">&#183; под каждый вопрос — поиск фрагментов звонка</text>
+          <text class="dgm-n dgm-f" x="520" y="155">&#183; ответ ссылается на реплики, из которых взят</text>
+
+          <path class="dgm-l" d="M720 94 H860 V180 H60 V190" marker-end="url(#ar0ru)"/>
+
+          <rect class="dgm-box dgm-box--accent" x="20" y="196" width="190" height="56" rx="3"/>
+          <text class="dgm-t" x="115" y="222" text-anchor="middle">Резолв метки</text>
+          <text class="dgm-s" x="115" y="239" text-anchor="middle">переиспользовать или создать</text>
+          <text class="dgm-n dgm-f" x="20" y="274">&#183; батчами: 50 звонков или 5 секунд</text>
+          <line class="dgm-l" x1="210" y1="224" x2="244" y2="224" marker-end="url(#ar0ru)"/>
+
+          <rect class="dgm-box dgm-box--accent" x="250" y="196" width="200" height="56" rx="3"/>
+          <text class="dgm-t" x="350" y="222" text-anchor="middle">Компакция реестра</text>
+          <text class="dgm-s" x="350" y="239" text-anchor="middle">схлопывает дубли и синонимы</text>
+          <line class="dgm-l" x1="450" y1="224" x2="484" y2="224" marker-end="url(#ar0ru)"/>
+
+          <rect class="dgm-box" x="490" y="196" width="180" height="56" rx="3"/>
+          <text class="dgm-t" x="580" y="222" text-anchor="middle">Скоринг по чек-листу</text>
+          <text class="dgm-s" x="580" y="239" text-anchor="middle">взвешенный, с порогом</text>
+          <line class="dgm-l" x1="670" y1="224" x2="704" y2="224" marker-end="url(#ar0ru)"/>
+
+          <rect class="dgm-box" x="710" y="196" width="150" height="56" rx="3"/>
+          <text class="dgm-t" x="785" y="222" text-anchor="middle">ClickHouse</text>
+          <text class="dgm-s" x="785" y="239" text-anchor="middle">агрегаты по темам</text>
+
+          <path class="dgm-l dgm-l--accent" d="M350 252 V280 H410 V294" marker-end="url(#aa0ru)"/>
+          <rect class="dgm-box dgm-box--accent" x="290" y="300" width="240" height="48" rx="3"/>
+          <text class="dgm-t" x="410" y="322" text-anchor="middle">Тема — это метка</text>
+          <text class="dgm-s" x="410" y="339" text-anchor="middle">список никто не задавал</text>
+
+          <path class="dgm-l" d="M410 348 V366 H210 V380" marker-end="url(#ar0ru)"/>
+          <rect class="dgm-box" x="60" y="386" width="300" height="58" rx="3"/>
+          <text class="dgm-t" x="210" y="412" text-anchor="middle">Что работает, что ломается, что менять</text>
+          <text class="dgm-s" x="210" y="429" text-anchor="middle">по звонкам самой темы, с примерами</text>
+
+          <path class="dgm-l" d="M785 252 V366 H710 V380" marker-end="url(#ar0ru)"/>
+          <rect class="dgm-box" x="560" y="386" width="300" height="58" rx="3"/>
+          <text class="dgm-t" x="710" y="412" text-anchor="middle">Объём, доля, динамика</text>
+          <text class="dgm-s" x="710" y="429" text-anchor="middle">и доля успешных звонков</text>
+          </svg>
+         </div>
+         <figcaption>Списка тем заранее не существует. Клиент задаёт свои вопросы, модель отвечает на них по каждому звонку — по фрагментам, найденным внутри этого же звонка, — и каждый ответ либо переиспользует метку, либо создаёт новую: реестр вырастает из корпуса, а компакция схлопывает то, что оказалось одним и тем же. Дальше у темы есть и цифры, и выводы, сгенерированные по её же звонкам, каждый с примерами, которые можно поднять.</figcaption>
+        </figure>
+
+        <figure class="t-en">
+         <div class="frame frame--diagram">
+          <svg viewBox="0 0 880 490" role="img" aria-label="Architecture: an LLM router picks one tool out of a fixed set and calls it with schema-checked arguments; only hybrid retrieval passes through text, and its result must clear an abstention gate.">
+          <defs>
+           <marker id="ar1en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor" fill-opacity=".5"/></marker>
+           <marker id="aa1en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--accent)"/></marker>
+           <marker id="ag1en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--verified)"/></marker>
+           <marker id="ab1en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--refuted)"/></marker>
+          </defs>
+
+          <rect class="dgm-box" x="20" y="24" width="150" height="44" rx="3"/>
+          <text class="dgm-t" x="95" y="51" text-anchor="middle">Ad-hoc question in chat</text>
+          <line class="dgm-l" x1="170" y1="46" x2="242" y2="46" marker-end="url(#ar1en)"/>
+
+          <rect class="dgm-box" x="250" y="16" width="240" height="60" rx="3"/>
+          <text class="dgm-t" x="370" y="42" text-anchor="middle">LLM router</text>
+          <text class="dgm-s" x="370" y="60" text-anchor="middle">structured output, not the tools API</text>
+
+          <path class="dgm-l" d="M370 76 V100 M105 100 H715"/>
+          <text class="dgm-lab" x="380" y="94">one tool + arguments, JSON checked against a schema</text>
+          <text class="dgm-k" x="20" y="96">TOOLS</text>
+          <line class="dgm-l" x1="105" y1="100" x2="105" y2="124" marker-end="url(#ar1en)"/>
+          <line class="dgm-l dgm-l--accent" x1="305" y1="100" x2="305" y2="124" marker-end="url(#aa1en)"/>
+          <line class="dgm-l" x1="515" y1="100" x2="515" y2="124" marker-end="url(#ar1en)"/>
+          <line class="dgm-l" x1="715" y1="100" x2="715" y2="124" marker-end="url(#ar1en)"/>
+
+          <rect class="dgm-box" x="20" y="126" width="170" height="48" rx="3"/>
+          <text class="dgm-t" x="105" y="148" text-anchor="middle">Analytics</text>
+          <text class="dgm-s" x="105" y="165" text-anchor="middle">computed over ClickHouse</text>
+
+          <rect class="dgm-box dgm-box--accent" x="210" y="126" width="190" height="48" rx="3"/>
+          <text class="dgm-t" x="305" y="148" text-anchor="middle">Hybrid retrieval</text>
+          <text class="dgm-s" x="305" y="165" text-anchor="middle">the only path through text</text>
+
+          <rect class="dgm-box" x="420" y="126" width="190" height="48" rx="3"/>
+          <text class="dgm-t" x="515" y="148" text-anchor="middle">Call operations</text>
+          <text class="dgm-s" x="515" y="165" text-anchor="middle">deterministic</text>
+
+          <rect class="dgm-box" x="630" y="126" width="170" height="48" rx="3"/>
+          <text class="dgm-t" x="715" y="148" text-anchor="middle">Clarifying question</text>
+          <text class="dgm-s" x="715" y="165" text-anchor="middle">back to the user</text>
+
+          <rect class="dgm-box--ghost" x="14" y="202" width="730" height="126" rx="4"/>
+          <text class="dgm-k" x="736" y="219" text-anchor="end">HYBRID RETRIEVAL</text>
+          <path class="dgm-l dgm-l--accent" d="M305 174 V190 H105 V226" marker-end="url(#aa1en)"/>
+
+          <rect class="dgm-box" x="30" y="232" width="150" height="44" rx="3"/>
+          <text class="dgm-t" x="105" y="252" text-anchor="middle">BGE-M3</text>
+          <text class="dgm-s" x="105" y="268" text-anchor="middle">sparse + dense</text>
+
+          <path class="dgm-l" d="M180 254 H202 M202 232 V286"/>
+          <line class="dgm-l" x1="202" y1="232" x2="216" y2="232" marker-end="url(#ar1en)"/>
+          <line class="dgm-l" x1="202" y1="286" x2="216" y2="286" marker-end="url(#ar1en)"/>
+
+          <rect class="dgm-box" x="220" y="212" width="150" height="40" rx="3"/>
+          <text class="dgm-t" x="295" y="229" text-anchor="middle">Qdrant</text>
+          <text class="dgm-s" x="295" y="244" text-anchor="middle">vector search</text>
+
+          <rect class="dgm-box" x="220" y="264" width="150" height="44" rx="3"/>
+          <text class="dgm-t" x="295" y="284" text-anchor="middle">OpenSearch</text>
+          <text class="dgm-s" x="295" y="300" text-anchor="middle">exact terms</text>
+
+          <path class="dgm-l" d="M370 232 H392 M370 286 H392 M392 232 V286"/>
+          <line class="dgm-l" x1="392" y1="259" x2="404" y2="259" marker-end="url(#ar1en)"/>
+
+          <rect class="dgm-box" x="410" y="237" width="130" height="44" rx="3"/>
+          <text class="dgm-t" x="475" y="257" text-anchor="middle">Weighted RRF</text>
+          <text class="dgm-s" x="475" y="273" text-anchor="middle">fusion</text>
+
+          <line class="dgm-l" x1="540" y1="259" x2="574" y2="259" marker-end="url(#ar1en)"/>
+          <rect class="dgm-box" x="580" y="237" width="140" height="44" rx="3"/>
+          <text class="dgm-t" x="650" y="264" text-anchor="middle">LLM rerank</text>
+
+          <line class="dgm-l" x1="650" y1="281" x2="650" y2="344" marker-end="url(#ar1en)"/>
+
+          <rect class="dgm-box" x="540" y="348" width="220" height="48" rx="3"/>
+          <text class="dgm-t" x="650" y="370" text-anchor="middle">Abstention gate</text>
+          <text class="dgm-s" x="650" y="387" text-anchor="middle">citation or no answer</text>
+
+          <line class="dgm-l dgm-l--good" x1="540" y1="372" x2="436" y2="372" marker-end="url(#ag1en)"/>
+          <text class="dgm-lab dgm-good" x="488" y="364" text-anchor="middle">grounded</text>
+          <rect class="dgm-box" x="250" y="348" width="180" height="48" rx="3"/>
+          <text class="dgm-t" x="340" y="377" text-anchor="middle">Answer with citations</text>
+
+          <line class="dgm-l dgm-l--bad" x1="650" y1="396" x2="650" y2="432" marker-end="url(#ab1en)"/>
+          <text class="dgm-lab dgm-bad" x="660" y="418">no support</text>
+          <rect class="dgm-box" x="560" y="436" width="180" height="44" rx="3"/>
+          <text class="dgm-t" x="650" y="463" text-anchor="middle">&#8220;I don&#8217;t know&#8221;</text>
+          </svg>
+         </div>
+         <figcaption>One LLM call picks a tool out of a fixed set and returns its arguments as schema-checked JSON, and only one of those tools goes through text. Numbers are computed from the data rather than retrieved, so they cannot be misread out of a transcript; anything that does come back from retrieval has to clear the abstention gate before it reaches the user.</figcaption>
+        </figure>
+        <figure class="t-ru">
+         <div class="frame frame--diagram">
+          <svg viewBox="0 0 880 490" role="img" aria-label="Архитектура: LLM-роутер выбирает один инструмент из фиксированного набора и вызывает его с аргументами по схеме; через текст идёт только гибридный поиск, а его результат проходит порог отказа.">
+          <defs>
+           <marker id="ar1ru" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor" fill-opacity=".5"/></marker>
+           <marker id="aa1ru" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--accent)"/></marker>
+           <marker id="ag1ru" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--verified)"/></marker>
+           <marker id="ab1ru" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--refuted)"/></marker>
+          </defs>
+
+          <rect class="dgm-box" x="20" y="24" width="150" height="44" rx="3"/>
+          <text class="dgm-t" x="95" y="51" text-anchor="middle">Произвольный вопрос в чате</text>
+          <line class="dgm-l" x1="170" y1="46" x2="242" y2="46" marker-end="url(#ar1ru)"/>
+
+          <rect class="dgm-box" x="250" y="16" width="240" height="60" rx="3"/>
+          <text class="dgm-t" x="370" y="42" text-anchor="middle">LLM-роутер</text>
+          <text class="dgm-s" x="370" y="60" text-anchor="middle">structured output, не tools API</text>
+
+          <path class="dgm-l" d="M370 76 V100 M105 100 H715"/>
+          <text class="dgm-lab" x="380" y="94">один инструмент + аргументы, JSON по схеме</text>
+          <text class="dgm-k" x="20" y="96">ИНСТРУМЕНТЫ</text>
+          <line class="dgm-l" x1="105" y1="100" x2="105" y2="124" marker-end="url(#ar1ru)"/>
+          <line class="dgm-l dgm-l--accent" x1="305" y1="100" x2="305" y2="124" marker-end="url(#aa1ru)"/>
+          <line class="dgm-l" x1="515" y1="100" x2="515" y2="124" marker-end="url(#ar1ru)"/>
+          <line class="dgm-l" x1="715" y1="100" x2="715" y2="124" marker-end="url(#ar1ru)"/>
+
+          <rect class="dgm-box" x="20" y="126" width="170" height="48" rx="3"/>
+          <text class="dgm-t" x="105" y="148" text-anchor="middle">Аналитика</text>
+          <text class="dgm-s" x="105" y="165" text-anchor="middle">считается по ClickHouse</text>
+
+          <rect class="dgm-box dgm-box--accent" x="210" y="126" width="190" height="48" rx="3"/>
+          <text class="dgm-t" x="305" y="148" text-anchor="middle">Гибридный поиск</text>
+          <text class="dgm-s" x="305" y="165" text-anchor="middle">единственный путь по тексту</text>
+
+          <rect class="dgm-box" x="420" y="126" width="190" height="48" rx="3"/>
+          <text class="dgm-t" x="515" y="148" text-anchor="middle">Операции над звонками</text>
+          <text class="dgm-s" x="515" y="165" text-anchor="middle">детерминированные</text>
+
+          <rect class="dgm-box" x="630" y="126" width="170" height="48" rx="3"/>
+          <text class="dgm-t" x="715" y="148" text-anchor="middle">Уточняющий вопрос</text>
+          <text class="dgm-s" x="715" y="165" text-anchor="middle">обратно пользователю</text>
+
+          <rect class="dgm-box--ghost" x="14" y="202" width="730" height="126" rx="4"/>
+          <text class="dgm-k" x="736" y="219" text-anchor="end">ГИБРИДНЫЙ ПОИСК</text>
+          <path class="dgm-l dgm-l--accent" d="M305 174 V190 H105 V226" marker-end="url(#aa1ru)"/>
+
+          <rect class="dgm-box" x="30" y="232" width="150" height="44" rx="3"/>
+          <text class="dgm-t" x="105" y="252" text-anchor="middle">BGE-M3</text>
+          <text class="dgm-s" x="105" y="268" text-anchor="middle">разреженные + плотные</text>
+
+          <path class="dgm-l" d="M180 254 H202 M202 232 V286"/>
+          <line class="dgm-l" x1="202" y1="232" x2="216" y2="232" marker-end="url(#ar1ru)"/>
+          <line class="dgm-l" x1="202" y1="286" x2="216" y2="286" marker-end="url(#ar1ru)"/>
+
+          <rect class="dgm-box" x="220" y="212" width="150" height="40" rx="3"/>
+          <text class="dgm-t" x="295" y="229" text-anchor="middle">Qdrant</text>
+          <text class="dgm-s" x="295" y="244" text-anchor="middle">векторный поиск</text>
+
+          <rect class="dgm-box" x="220" y="264" width="150" height="44" rx="3"/>
+          <text class="dgm-t" x="295" y="284" text-anchor="middle">OpenSearch</text>
+          <text class="dgm-s" x="295" y="300" text-anchor="middle">точные совпадения</text>
+
+          <path class="dgm-l" d="M370 232 H392 M370 286 H392 M392 232 V286"/>
+          <line class="dgm-l" x1="392" y1="259" x2="404" y2="259" marker-end="url(#ar1ru)"/>
+
+          <rect class="dgm-box" x="410" y="237" width="130" height="44" rx="3"/>
+          <text class="dgm-t" x="475" y="257" text-anchor="middle">Weighted RRF</text>
+          <text class="dgm-s" x="475" y="273" text-anchor="middle">слияние</text>
+
+          <line class="dgm-l" x1="540" y1="259" x2="574" y2="259" marker-end="url(#ar1ru)"/>
+          <rect class="dgm-box" x="580" y="237" width="140" height="44" rx="3"/>
+          <text class="dgm-t" x="650" y="264" text-anchor="middle">LLM-реранкинг</text>
+
+          <line class="dgm-l" x1="650" y1="281" x2="650" y2="344" marker-end="url(#ar1ru)"/>
+
+          <rect class="dgm-box" x="540" y="348" width="220" height="48" rx="3"/>
+          <text class="dgm-t" x="650" y="370" text-anchor="middle">Политика отказа</text>
+          <text class="dgm-s" x="650" y="387" text-anchor="middle">ссылка на звонок или отказ</text>
+
+          <line class="dgm-l dgm-l--good" x1="540" y1="372" x2="436" y2="372" marker-end="url(#ag1ru)"/>
+          <text class="dgm-lab dgm-good" x="488" y="364" text-anchor="middle">есть опора</text>
+          <rect class="dgm-box" x="250" y="348" width="180" height="48" rx="3"/>
+          <text class="dgm-t" x="340" y="377" text-anchor="middle">Ответ со ссылками</text>
+
+          <line class="dgm-l dgm-l--bad" x1="650" y1="396" x2="650" y2="432" marker-end="url(#ab1ru)"/>
+          <text class="dgm-lab dgm-bad" x="660" y="418">нет опоры</text>
+          <rect class="dgm-box" x="560" y="436" width="180" height="44" rx="3"/>
+          <text class="dgm-t" x="650" y="463" text-anchor="middle">&#171;Не знаю&#187;</text>
+          </svg>
+         </div>
+         <figcaption>Один вызов модели выбирает инструмент из фиксированного набора и отдаёт аргументы к нему как JSON по схеме, и через текст идёт только один из этих инструментов. Числа считаются по данным, а не достаются из расшифровки, поэтому их нельзя услышать неверно; всё, что всё-таки пришло из поиска, проходит порог отказа до того, как попасть к пользователю.</figcaption>
+        </figure>
+
         <figure>
           <div class="frame">
             <img src="data:image/jpeg;base64,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AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAKGCAACDBBBCCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABKwAAADABDBBIAKAAAAIMEIIAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFDIpWpskIAEAAAAAKACAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAKBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAgAAAAAAAAAAKAAAAGFLFLELBKDFPJMJAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlpYzKgDAAHIEAAKICAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEHEIQhCIgAAAAAAAKMIAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAKAAAAAAABAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKggAAADCACDBCAKAAAAMOLGMFAJCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABqd4CpgMIAMEAAAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgksIIgogAAAAAAAKCCAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAEAKMIAACBBBCCACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEoAAAAAAAADDEAAKAAAAAIIMEEIEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFJdAgKlgoAAAMAAAKBAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAKMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAKAAAAPGNFJMFFDKHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAPwqgAJAAGGEIAKEKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAsoEMgggAAAAAAAKAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAKAAAADBADCCDBDBDABCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgDBggABCADBACAKKCAAMAAAEEMMIEAMAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFocfxRzggIAIIAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHPPPPPPIAAAAAAAAP/EABsRAAICAwEAAAAAAAAAAAAAAAERAGAhgJCg/9oACAEDAQE/EI66Yq6eHJ4iCnjhCNeBXl5j/wD/xAAoEQEAAgAGAQMDBQAAAAAAAAABABEhMUFRYGFwEHGBgJDwkaGxwdH/2gAIAQIBAT8Q10ejfhxz+OfmDWexD+uO7N2sUUmX0/iUM7Z2zti5S+NCR/3jp+XLVj9iEAK243g3i1o6ykF3tDmtJfmzzhWW6wVo+OUVMpON2cYiNMfA2guNgvKUqjDjFQpMBVa3ByM5nWtKhVwZQoBWTcbCVnCVhXjYWhAPZFdPG2qRRO1TL8YGPoTA1GK0uSxxayIip4uKYktvLbzslt5beW3iri+NgrquZ3HGCswK7iZfpKvnp+8DBb7wKGOscQN4BseOGvWnHallOo7olBiuMMqS9V3cU33Ma+qgFdQYBs3Fom8d28bWq6mZhlBte3oxRjxkAUAK9zL8Y7R2hCzaCgN4sF25Qz//xAAsEAEAAgECBQQCAwADAQEAAAABABEhMWFBUZGh8RCx0eFx8CBwgTBAwWBQ/9oACAEBAAE/EAExZedBzYXyptR0J+qf+z9U/wDZ+qf+xBl78nswFEK2Gh+dv621jVj/AAaPaPfIyNasM0tgMtOSooqCcC2vVmzIT+VEWBkZbSog5xUwOADrT2X1cDWoC7eq8qogfwOMGMiAkFuhn+KwMpAVyOf9VfoeaOQQgeGHLO+KBVxvRBC/KBKqNA4SP+2CdJi4nt/oX/scmSxHg3k7c9z0/T80czWzlsGCjovlmIX2ftWT5JjlWtKjSqUfZOWDk1e5lJ+IFGNWiS0bGl0NGqkwtNbWU1wdrbSw5Nt2Fb0Xzo8yGMxpfIaDSFuTniudGq7LyBjdy1BqrcioQBoRplFAIYfazyhUNNDIiZww0P6p/Q80y/axNRUolvHrm95f0ErVoYcj2CNdiZRcNRQsN/OZwftz3PQF1BLHCyo20N/tsXKSpCKZnRAoLoGpgdbvGf1blpTKAXb5FZqF3V8ABAo3Qc9ENCH5JqclE1S4UToiW75XV1biaMDs7AReBNVRwKgli7AUSl0Whai1QgHLQAbjUcF0QmglLyWkLVoWboBR/VX6Hmn7LlKEAAPCeGcuyu4SY4daFWjDznrK9GqNbaKWLcKui/Q/257nocgajwDWGNR0cjAWbk0oEoGa1Zfo7ZQOqGT8mfR62naAWqugEAEtFicZcvYsxZYf9NetwOho6rA/gI6zF1CsYBrOuE0lxI32wJTVmfyQF04tRkPwVH+RSulgWggnDCP4f6h/Q80ohySGluNIsOqqq8xQjYYkUEXHUcnoSV5WBboLWROaVrFXMPwHuejvhIC1VQdCGi+miEMWUW6EOqBw0FbG8TQF4qsDoPhVFhAgKuGSmXfGoi6pqQ1DxipyoVCqKQGWLY2i6FXKzSC3BjQN82W0zYX4yoZaIojrllEzbWCKlCvyJpqQ2OwDlSOXjRAFwJC61x6iHVQwLUZIJa3QKqtleAUlWYs/BsHpTuK6UEXjJSzM8wYrDRU8Kyc4BF+sUgvWqS4OKusFhb+AOyJnfGiJnF5IAb66dSVTOtiyGQXEBqQMNCHcXpOhIUKY8zXXky6JCCrTwLK2RmgZlOlTWV+a0M1hP6g/Q838vYe5/wBMEHUBDzpHMNsIAUAcA/qL9Dzfy9h7n9bfoeaCAC3wm30za6ZtdMw0HBWjPYe5/wDaKAq0Euyg5tE3/Um/6k3/AFJv+pN/1Jv+pN/1Jv8AqTf9Sb/qTf8AUm/6k3/Um/6ko1q2RgARsZYoq9VdAn6ec/Tzn6ec/Tzn6ec/Tzn6ec/Tzlqqn5nYRsI2EbCNhGwjYRsI2EbCNhGwjYRsI2EbCNhGwjYfr8xlQAZxowDb5nJ6xN/1Jv8AqTf9Sb/qTf8AUm/6k3/Um/6k3fUm76k3/UgmHrWpN/1Jv+pMavDx4en6Hmmr+CVF7l5wr+TrMBW+Mool2mhWaeTAb9i0Oq4iWYeZO7nsPc/hjI47RaBpzUIngC1EdLQJf4l+uCKmu6bt+Q/jaMcCklGOAL+ZcZNd2WZWFURynWLtoS0dVoh5CY2NeeIAcVCX/FOMC8qLR1p+S4UMSWyaTcfR0a5prKG7TFDo0VELAM0J1lCxayWJY5jHDgAJSVxEROD/ABRWONVhf49SFRZnqCtvyDDyORxkH8Ib69vTcS40vwbBqT/JcTBZCWCL8LB/vpn2V1beXVa8Lv8AiDyRi2i0ALdD0mqxq8w1KQfQE4EAFAM8VQOaxd1V2MCmTOBpL9DxiXitJuMCX1O1iwZcTue0u1Q/xP8AkuPu1OOC8qoxz/i91ZQLVVggLZJtAAu4xLly6hPEFktETU//ADsg8EX6Acscq4BrlXYMWZLrDWxzgGH05S+N7HrRM77kXh/ez/qK/gg5QRapaahzgSVELEdEfTKJLajf5q9k4MuIRNBlXERwRUqsUDRWpaZyfwxDhY9pr/M9v4HGMXRDiYADeVTHnANVoFHOycldcBsODSY/hn+I9AcgqQiw6FZKxcxsnTVfmyut5hOWU/gDZ/sQCNyn5A1e0otJBYUtbYZ5Qzm2wPm2s/jeKqtow2q09GHXCojsXVwWimGPfGlBNrUwanEOsu6TguFrWs6SrpYBHko6+vYv/kc7CYtTC7ltUVjFABq3i4JIS0VcRVIIigREckT1ATgDdULEdYlzJwB3AAJbpmyzMHldKyLAmojdy5dzLcYDs6efmrgimWzjfp3D3mtIAtq14RI1VKWyhVvc6xBEdGK3dan6Hmmr+CWGKCIRNQjLYFIL29vECwMSOOGjDn58U9qhYFBVTuZ7D3P4O+uOKI8ygX8EsF5pK04LA2BEI5QuFqHpGXIspbFGqqEdNPj5umVXCAi2N3SPbTH7jANmcUSoDPNYanGkphqsQVfYGvsa4ZMgUfwLisMZpNAJzJiaT5ealDQFApkEv6qtOI7YmdRdSaYN7Cm5lDK06GVOHdMiFjFxBW0asMYfaImhJoU3Kky0w/gkKyq1KKCKEy1FVApNOE9FfI2utc3AoruLWzTKWMFPDEGnnCKR60WLSquLEy3tFmB56yMGMElD+kqwVQRxcrpyS6nDs0qOkmUo1RgGohKNqvQVVGQUOn8Femc74IMWdCUCJ1dIAMiljGWye4k+QoOeIXY9cakNQFi6BEu5XNllBEN1nnLiyOcWZMBVGrWwG7Fk5FXQCow2UlUUePZAB5FdtSISmBTSm6g4m2eruU5yb51BjeS5tMP8DYcFcKlUcoZOMf41eLjFFXe5NoU+ORGi1VoGj0iLIX0syGNgriFM5i3e4IlOjcmBxM6MCNJrozhyNIqlcyaFDCeMIQyAIxUTlyruS2rTGjiNAmwIn6wjFNKHKYuXqbECgNUEKIAzcBLC1Kbtu1oXMwqD6FEKoIOFTMKblyCEost7NUUaYfgHmYj0GLNrOX8GaoQQcqmLRFOspM7MhDOWySYKMxQHjrJlkYNWFgG6lNREaZaCDxhlawwbafZW1DTcMXKKyiIKKFCJLQAMHlEexILQdgdDPF3uD63VOLiIsWFTTT/8zX+CMrcZFFwRa8mE8wg1pEwksAV1YVygiHUAJNsclF1i7hvte04CBouQBOYAFQdqcLABUVaqLZrhxS/CQtqbgtqJVo6eoQOE4nBpmZoMIpbwQVd8dMQNv9A3VqEMULO9KMiFoS1lppaJRbLsk1swAQ6zKKqjSIX5v5ItILpRed0wULX7JaK0rjcrShuKdawM8PQe2mv8Ht/AYFifToZpyFONQb35IN1ZFTkLAkroEhvaKocFOiXm/wCHYEdIW6hBSZoooIpoQrQasICVJphbnEzKC7g2pprUKhdsZlv4hYIsWFwcRo0Jx8XtwlUKEDI5sS37YKGbRHZySDRwfxwKJVXEmAFi8Yj8cppisVGcG2h51E+M0MDbqisOBmXa9DBCHQQChqYjq5JBTYWqAECtv17F/wDI6fy94To9CiNjgl2POYm8wM6BUSxtLZo8mSipr1yoC5VWELUZJWPcIu5X5h16moK115rIsF5JWdaCjycmampSi7ShRd+Y7KU3AsKuq0E1CUFdi5KYDNL8ywjyFHmgi5p3DND8TuHvH9OgLSWOW07V8JxBKMCsMFxy49r0drP0PNNX8EKplxTIAFYcIiYYuHrw5qjKtuzZyJdDjaQ6gAFBwncz2Huf8ty5cuXFxe+YwWy5ZcxLl/8AUfBgcB1EdSAcoDABoAaf9E8aKgyXLg/muCg4DqI6kBAAoAoD/wDROHMGCARseMfOl/n0UtgN8CAGgBgP+CrtrnIEsT8wNfICq3gAM/xxPRY3jAa4Sb2b2b2b2b2b2b2b2IVhuwKA5f8ATc7C/wDI7jUZcvQNAgCUaBs8ecDA4BQBoB/IBTpL8IpbW9vTvHv6nc+YzGoT9DzREG2qSeDng54ODAU0Dqz2Huf8hTlA24qIbyuuf/CxYsWLFixY2fL9rKtQtNR4P/0CquC8sTZerNl6s2XqzZerNl6s2XqzZerNl6s2XqzZerNl6s2XqzZerNl6s5tvy36HRtBok2EbCNhGwjYRsI2EbCNhGwjYRsI2EbCNhGwjYRsI2EbCNhGwjYRsI2EbCNhGwg76q6rxiCU6TZr8LNl6s2XqzZerNl6s2XqzZerNl6s2XqzZerNl6s2XqwLQerNl6s2XqxazLm59P0PN/L2Huf1t+h5v5ew9z1sZh3PxL+GX+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2X+2W8MEhVHAP8A30/Q83pgZgxl4BBDVTUX4wY15AwYEKql+vsPc9ElGriAABof1iTLRKjJdUn6Hm9NEeJhKR/yF+0nF7nBvcZ8ZqHyHlx8eFo6q9PYe56e4e/rmxAmcdG4Yy5xZdQCblQVcmsQzSjUeai2zh0qICJTwEKFjgbC41xLAyus0GwBVgtRHURrV0NGdWQ8LggDvussAS9vWByUODc14bKRTBNEcP6p7Wfoeb+XsPc9PcPf0vRAF1Y/iWeUIRZDemhZ/jdRUhFQpy/mNLfkJ4UOBTxVpcVpcpUDoqlFAMVCwPDDvuGwaIWhC6NWJwgsyNCULWxKwHhuHZZA2TlAsYJiZVSAUQaj+qe1n6Hm/l7D3PT3D3/4K/qvtZ+h5v5ew9z09w9/6z7Wfoeb1Q8yv7qnaONuONQywrA2J6ew9z0dJcFnvPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk8iTyJPIk7Wfoeb0MXDNR4DLFhkHhrMs7PJ4hbOJeeYg16colOiAIBZfL09h7np7h7/1n2s/Q83ogESx4RUFqam1ErJtA511Fc7AyKjh6ew9z09w9/wCs+1n6Hm/l7D3PT3D3/rPtZ+h5v5ew9z09w9/QKYaedf1fEREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREREQEMredenaz9Dzet+vsPc9PcPf+s+1n6Hm9GskG1xgBsNUpxcR9Kn+tcU2YLYIUaR80QVtGA/AY5+nsPc9PcPf+mWLOPEUFU1iqG/H/rKBa0evaz9Dzeh9xFlBHOBGqTkwXAiWdJi3nQoCgIqNMERjQRXfPp7D3PT3D39L8C4XKHCZeArM/wBQ5RbasLStQhZBkKgArbJTABSNAi4DI5XWdFbGSFtqEwWLigFSgzZjIEoWzHN4VoTkJdGqiNAMlgUKDGgKoXF2w7nZZrpVgibMDxEWO9LrIpi6zrQCNMPzJHcoqg2auCSg6cPC6LDIKxpMme9dbLsoA2DgVBui2udxaQNU5L/Rbp/xWAUqxQsNqOxGLXipWDbgbFtx6PNOZRTBQYQ3GRVoWFBCNKpjDWuUBVF1IZPSs2heI7EOlwDJyJWcRq6CPpvWpuyUbExrDcmuBAicRRU5vMU8DyhYhyWriBwzDhq6MhSP+RZfZ7Sby8KYccNkPXtZ+h5v5ew9z09w9/QnC3SIK8AjcIhiwGQDqUgKgzQXcfM/LoOg0ngES1RA3HpN6ChFSmGQ1lkQ4KyZkSAXgqN1M+yB6XJFejFDUDKP5h39NdCBWqvjGZFRJhBUWQkbyIJdqE8LotVhrwivglADpcDBXMWHdYxg9dzATBSsQFb2PeVayyKGAgR1EFyrFbLVfH+hr9ZUrKCo4xw1uAjS44uic3i4RFmQGhROXA5bXAgBQyjnZio4MkMtFQRq8QtOGVqsjjhk3x6WEQ7lNVubK6hzgkSbrI3vgaIej7q08i3MWNVEVq1ygAbwQn6tiwrQ2I5rDDFEIygWOU0Ru9GaXTht/pj0fH9llclaUwYcxd6ScB2AK9VqyFwpIzU+EvI0gNYYqD8ZL1NOqVsjPEoehWXQhdPBrjC/Zj9FLISgrFHHjAOQcE0W2lN66rlAW5QFbFc9Q4xRRUt/DVFtFtjQJjiX/LtZ+h5v5ew9z09w9/6UGUWiW2FYxnU0qDsKusrYBz3RPHnIGyXRSmywFC2p4Q0wXTtxcYMElfssISFo36JqQRU2SlnRqa1hw4AhQKBvmbCqhhLo1QQut5UNKr/JXnqoWNC3pnA3DADShNhWMPM5QUpuzDaIHJ3hOmuM5B0WH4Yi/TIbAIDAo+NZzMgooUQS0oWn/S7Wfoeb+XsPc9PcPf8ArPtZ+h5vQn1VzCNTdo/2OxbiAyNRVc5Zc4FZElTgrOgHS/T2HuenuHv6JDBbyv8Aq+IiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIhKZKeV+naz9DzeluqLxkcAwVuQOl2VuwLCcuImLgxP2NJTZNMirsx6ew9z09w9/6z7Wfoeb1UV3wtLmnFgAUYD09h7np7h7/wBNIXazddrwYsFMvpUaXEtmjYtwXV/9ftZ+h5v5ew9z09w9/RyYC5CFIlueZKf9lc7GAyBqwpYXKRZOqxVQFtLg4Ry1hvkwqBgpoUFtLIiwoi0LAt5RQhAkrVAXnNL1IlNR3rzG/wAK9bxXGMBKk85A3/qoUrCkBZbnNvIKoFgqBbmEzLBLyOllLleYLsLFBYWYyc5v3dtebQb3DRGS6owkOKOI2R9Fe4EWrQOZHaRMKFltYOl8GVEsNtaUZmRNeEVBE7pELyBRYQWAd5hHtjIAluhxiAGFxOglG7LBm5XGsG2qZAMwbtEKolrVFSmKNrEEOZUi62bO6EJv9DWQDibKjiOZLZIgZXVUy3jRHdyZBamcFliwaHTNIIsRQIXxIqEi9TdO2BYK14RCkR2gA0ziUqCxMt1QtELLRxcBk4+iEV0uQMgUsH/7p09bDdfweuGc1VjVTNFOkHLzYsBsvNIMP8M2TsJZAAMqqAGVZS2TW3Sai0KiwPco2pUlBzxH8FAt0imt7Zxm3UOZh4SxzUqAArEqwqlyhkUWWhrGltGtaR4noNd0airDXGnhK8h6PrjLWOem7tq/TtZ+h5v5ew9z09w9/RDNiwvKtg01Y8kD6AxiGhbN4BDMaw0FDJJNJyABKhlBlIClaLDoM3K+oeO2Zs2N5sq8iQ3HajjIUDk0gsJEQ3kZosg4DxRh0rTGEJOWOq5My3jVzjMdfaWtgqgLQxwkWyEoUWYmGBOTemJ+qauBRAwkQaymZBW1Itj+IpZ7khiuwgQtlmYRQ9wruhHlSS0pFjjwUnXosixwXiHu2I/C8DSA1m43ajeDchGuUaBsRwbOikur7K6xAAoZAfSQAJUVeSZS71qECg2EKg1MwaipCoFLPKy1WDTHFg8WUh7MULL/ADtJRFBauTJrnMToelmItnlhanFgeBQSllZYiyUWInRinVwD3ULTEaez40LDAEVBRgIDyUTW4xyQJBsugWrs83G0AEFu1WKb3akVQzADpgYv/wC3obKKKqtABlV4Es7vAPGSLu8VuRYyu0dLGuTnpGYS6xne8drOPE1rfGfvOUPYetL5F6w6aGtTQAtf8l4cailpGBTQcuhwDWLaV3jpY1yaej61k6ArnAIDCIo0UoPnrtGdAg8UII+GS4QPtUBaBBMD+DLhRMzholMWOixLOpaDFrgVyDN3C1ndorADM2pqIysJQCjVYgFPwFVwP5drP0PN6UP34HLQBqq4AywpG1RNAIV4F59fYe56e4e/9KsybiQLDkLf5qL0aGlIBViyy7wl92dnkDiexHj0ubIVHPL1QO5U4RKNajoS+GwrKIS+VqdZr5wF826EXcPjOVb6O7OI61WQKzv5VWJYzhhylXI2JmOEm07RRHAoP+wc9ediWBxPYjo6BNkKnPL1Qd/mxUSmNQ/4f9HtZ+h5vQLFgCum7Fmi4uE8BIowApWVSmjUQGhK4AazcRLE9PYe56e4e/8ASrgSaiWRCIEcIwCAAUBwhgQcAomFBa2irecAAGohlnA2NYZrlEAHQUySsoo2WXTzjgSaiWMQiBHCMAgAFAcJWEHAKJgQWtoq3n/0e1n6Hm9KrL1MNNjsiDcOPqrOKZtoLpprSWsNZbAKCNA3tfT2HuenuHv6AbdJvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92Zvdmb3Zm92YBscenaz9Dzfy9h7np7h7/wBZ9rP0PN/L2HuenuHv/S6Xd6OGrMkBxLC8gKKzcEZmMltQKF24n/a7Wfoeb1v19h7np7h7+hS/sYG6+lkslyyXLOcuWc/SznLJpn2rt6C9XDiWM6H01KutavjLOf8AQvbvWZiNEyQ0CpopSq4f8RNtQCFvDMUD9ECtjjNz2hu+VfwUCrQarA7HoljBgOGkCr01lNQwuvRCCYxSMWcF6WwNOVAvAuaL8dVFrPXtZ+h5vTg9JUtthduxAPyHZChTUYGGLcxMIgSisDAlSGLXP09h7np7h7+lDVojelSECwtLioStjJqwDIEEwvESkckauks1qXLa1ApvNkqEP3QGzCRhi7ju3LfLOAFXLZAkd+1OVoiLUCyfjFmzVQuXLtTTcBWNY5opEUIhWLZHiI9x2CEULnY0CmG2MzUiUGgJQshW6GIDo8ShrsG4IqQsjlRoBZ4ZzzthC7p39gwCr0ADVwe77fEPYi58MREwG+vcIFYlTUYibKTdLFVkRxaAiDGlTgNWsW/0J2r+EzEMDk6S1Kur0us1dw/3F6brI288DR61PwFFVWgAyq8CA3W5CDVDkT+CVyzsBVwtRFEavI0yijFjo4MlylMKGPsVSR+uMXm1wfwHgELtramia5MrmsfVyUFk4WoClReISeagChjg4CsqqlL1KzaDsGLsLZAX6mdQEhaGo1eL9e1n6Hm9AjHKsAdOJZTssW4ac5ynDHPBbMSt6egMCvIZeKr6ew9z09w9/QOjUhYyvG+sY7lZhxOY3LY0eT/IApjQDSb9Y2et2knJWYyOsy86rngr8P8AIOAXJIooucLQLRa1MDeeAxetfmJtK7ucvZ/ktvj24f6/O8Fp1IL/AC5yvt1BRWmNIm1iFg0NLiq3Ysi7MD+Zg7ywBlrXKCIc3dZq26c2LGilguYGmr/QYqkW2gIHAW8OUC7PIVtJyQc7syw/oIhbxcs/wJiRm1hfvOUGbZIBpRXFznhyYRICilxWhLch1iiLGNE1Xwcv9gKXkXq9QXwLSAT8BFIKMhzOkShXxaSs44ZK449Klfyr/g7Wfoeb+XsPc9PcPf8ApXVkpVFViCYxHgDvYFWIjYjm7uWw7AHEJbV53Kv2BGqrJKlYqVkCARQ2CzVuBL9VBQNVhq3GiFGSgxKFGTQ41crrWYBFdA1R0u48OHJQdUosa0YswBJbCiyExiLGHewA2IjYjm7uX8bAHEJbV53KNFFTVVlSpWKmJQAIysFrVuB/0e1n6Hm/l7D3PT3D3/rPtZ+h5v5ew9z09w9/QDSWTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaTaQDQUenaz9DzejdCcWgK0ccEPg1lsxCJXq3ReapgYNRLcDSjSsij6ew9z09w9/wCmCb3xBOp/2+1n6Hm9ACMpYEWxxxcsLQv8wl1A0VL0qLKSyVAwgaohiy+NensPc9PcPf1sf42f0dk4cVZOQa0DiArdDijmF2WVS+cYnMLyNqHC6On/AC3/AMV9OaV0C16Q8Qz0JxpxXw/Pr2s/Q83o+SR9oKROIkEmCxuWr+fX2HuenuHv6Y2FiWC0TSuOKUnMMFsmqRUhYSqd15GWFMqcYFyhSbHA6zYReIyXSMQ9gQvoWrQxDYWCvIpSIoy5KugwvOLmjjoFhiyxoNoUoxrThMtmXdBQwI42Oa06VkICtbqUGJHZAqbQtAoRrJXmfMxU20qUoGByvRrFogpyXy/NGcrQAU+K3XAuIK2h2OEsNYybkuq7jV1keMXiJQ4ve+6LY4NRYIudGZ3g8HY2402Xx/oTS9Et+o5f8ggTmog6seAFVYh82GzQK1bSyi5fsLBGI2UXFoov+FV+LTCtxEWasph0lQ3Gy6GAXEQaS6jSqqWUUoWqtaSsQzFCqxFwy1FsDq79Vbq2FtpvireqFv07Wfoeb+XsPc9PcPf0rFjQVSiJrJ3eC9wTDLou6JWOdixoLKrchl5ttjGrNlJUDjAKY60n5dyG/tuwCqIdE0QaBAzHIZebesa4MFQEAsVBrNwMGH8cAEQAQ4ORFVVxg5ClbV/sUbygoI6ksAp0qiIiguGvF4gdsFtItrVWpNljkJ0gZrBJWJZYEhCjSCZJvJjRDwCTDSpUKyRfAOtEWLd2y8YuxowVpucaxhKyt0xYr+V/oNklTwq1da1bHJNVgALXXAHos/iW0LbB7EMj6lNAvGjaYzrrKasaddLjVTqF1iWtYU42Wb3DSrxcGfToUqT4XtcfqFtsGlZKL/3aPIrCe5AaxWbWJqASKmgbglbMoxmqYIUf4cOTjGfukMSyK1VszNmRq/WtkutacmPSlCLJWglrS/xGAF5AvZ9AdCS9JTXQry48FcOP8EHuAgqEcJogxIbeNWGTUKmFgi01SG4ABWjxlc4Quxi8XReSjNF6fy7Wfoeb+XsPc9PcPf8ApVLW1cQpGsnBuHwLRASu12Ua4xCseUJhlJtD/TOkOktzDBV5XJ6S1cFJKrWdcGDGseK4CL2M7rAtNdoPCtLMFOpWRd68N4vETlPPusmM6a50gEBhmW7KdTP52jGwVkAvDI0DiHwwJAau12Ua2Yh3zaQwyhbQ/wBM6Q+wjMMFXm83pLWAI1qtZ1wwY1/6Paz9DzeoKEs6Ka4vdDbCFFicz09h7np7h7/1n2s/Q83pvkJkA/xdxFW/yqCXEZUzWNZTNg5mIQKW2xj09h7np7h7+gUoaec33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6E33Qm+6ECGW3n6drP0PN6DFvnpraZwKrFlkoI+KgWCclKmxuHV86aSvKAYGMunp7D3PT3D3/AKz7Wfoeb+XsPc9PcPf+mnAwkAdXLQW6vJu720/7Haz9Dzfy9h7np7h7+gmAQQeC6U18LuIHAqUKcSYFsitJa62bA11theBpGqmr/lhDaFxCoLy1CgRTinqoqC8Wmpom37hxYvFjQNQkzc9Xo6ve9c5NVmZdfGHdFoWnmmisY9tsoCSoxjlIVGHB5S7AUCgrRTUzKGcQW8wqYGrau8Qob3PJoawJBwHWmFldCOmcBAcqxL/6o6g8mZVODDrH+XnC9lLAbVwJhKINih8+HaHBxapGhqUrC8FVuQ2GUasPbQWsbOzTjpCQRHRn0YVHKgVKgnvRSItEcrRRzAEvm/zzkYEHIjTiA8c7uFMsaDggf6DBErCFtpZwmn6lgiSjCugc2DeAQS0RNT+J68AikIouqM05AuLzawshopL5Z3C+GUcecWlqc1cf4PyCgWAGXAF2roCwwQRmJIKEgKwjYwnVghQqyswsZaNbhFhMAxWRvROx6LaA2ktFJZtFVknoRs8FXFaqdGfTtZ+h5v5ew9z09w9/QoSAcAFxixF8oq4QKaj4kikDCWx88DdnAWxaBghJaeixh1suZFFFXMN6Tl8iXjcrKjwq8CQCCi2rLeCCKzDt9M8LVotOBfV5+H/7qxVa1UjSmNUA0fwAVgqGVQblqbeNhvbsZNjBL3hQo0F5ktUpW7bMAVrnVm+AuYrnUgHbI9o0oONcI09oH+JvDOlEdINlDyoFQGDXGY+IpQeskBIYqGxlQsCCaEFSq0Biy45Hu/QhWy0IomGlInRgkVgqTgdA0M3fjpgWSClrqrGCsuYFFzdcN28BZVDLpA0fy428y8cFYv8A++cBiCYl0LWo6GbTB5uCt45NhAo40xUzdNyANSxqNhOq22acP5gARiK8H+WQf8mnCxSo/MkNv+RIpMYqA0cbcblKQNeBZNdWMQLLBxVwEViQAUONMVM/zcgDUsalGLW7yKOH8+jmwGW0BEKosLsjUObQON3B1RaEXSFWRUlEOS2jDLa/g9kyJRcQUEsssRLlhRoughawtbj3gIAAhpzQc0WjnOkyzue4HERAt0Dqrf8ALtZ+h5vV2VoIREzBm1K4QFiSyCsNg4lkHJkdPT2HuenuHv8A0q0qM4sUAFzT7xiKxhUVLdKAxezhGcMDhMBZodB/rjClRWgCxBayN8fiN0RBiZbAWwBzv+ZcCHUMjVtvLasx2B45QIpreiqrtDpbpEfEbpye8A/+oqwtph58KiIg5HVW1WWd5XE6uxdvdKAxepEMpChAos0Og/1xg77DQA5gtZya4/ExhE8J2ylsAc7/AJ/6Paz9DzemV0DDaKLTqsSYIcWKsew2Fi8hhfl1G36t2AwAB6ew9z09w9/6z7Wfoeb0cCTUSxmnr7D3PT3D39EhYK8ieePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmeePmJS1DyfTtZ+h5v5ew9z09w9/6z7Wfoeb+XsPc9PcPf+mtIKb3HF6zhWTWt8dv+x2s/Q83qdqKWPXR7Ch1/wBPX2HuenuHv6MdY3MEo4CFeALwhsG6mz/BAx7kP4DESBbngLvS4D0hgi1S1Ic4iDQIElgl4M4mBXbF2lWpuCmVTimth0bQIlQIN2is5sJjiVFb+1DHQOgbvQgGeynDNN3pnGsRIGw4CAcsioFc5bqyF5QuWxBGWIsAFC1qCP4SGnu2InoNlyHbnGojiF+cN1LrdUJAxgbK7Rocq9cQ6uj0iAiuRUL3IcAFIjGWIJpGzC0IrupYqsJ1aBi6WnOImBJCjGrvLCi88IGyHQqAU5yBLdMxCMFGlBWrU0C45MJWtuI0ZdVszc3gvE0tgvjVROXYvUhNaRAR1yXWNaqWC1zyXkROAazisNy3DcU0LBy2YgPqMhrYXJy/+5tZcEJI0AMqsBUQcuAdV7cbK1jEKIvg3aPCi7gEwtbZRYZL4x0Zp+hE3OeTCKnNBiJKFynFA/1YWetgln4dHhX8cODQdVoJBgxdtEU1X9ikIgqMppLXxKNG6AYA4tH8C/FYAN1wQFYslor1cKmEmSQhycCi6qheDNU7EwN5aZM1yR4npdY9NSLocV4EI82llae1a8T/AEB9e1n6Hm9MaNvgg1b+ajOwBBii3RYdSitIdvj9GoX4F+nsPc9PcPf0p3vR5m35FH/IfOSEHWClBVZ4WsIAWjGa20IRRDobifpRlasbkqyDrcXEpi1Yt1SErKujNkbyQWA0DepyUylZRqGEEDbotanK7ulrACmFcxsi3PE7Wu8YC+LWkKWHVRXey7TScpKsBmySMgsssRoiDhKbquBYE4jQIkQ16MYFVVIPFrZAZkNkykyqEMiFmiuLla7bY5MTQus1HaAMUJm8OVVgxuwEo8bkY9YpgMQAclf8BJtwaC0DCdWSpjdeMANCreqlc44RtLphPPBTRF7ZuVYBTQFmOjoYgEYNdZaWq2ZoZPkDLXIsAtFtR9mhJeWwkIlryj+hJyOhF3JZxNJdEaMydb1wowUThXsVX2pFkVRWsQCxQ9omVhVC6HP/ANxdZSeuvAcjMPy2iU2On4/gsz1dGacIOG1+LbWTGCq/4Mqt0lvVtnEBT/4IweImyihwNmgC7j1vEUqyil1G0rAaNPUIhpwPP0zN2XhGgHmNDkrB2GMVkCVaFjQ3VdIpldNTNQRhhqDYFOdUQUAwP5drP0PN6EXijwbjhibHcIejKVKGnOlsZpaSQurQa49PYe56e4e/8q/o99zizhJoXenpKYGRrLUtsM7kEGKimjJOZ7DHc9QLNKObh1JWFUrYSkeThxtHjksg3wxeQGXNyvyQdTP/AAVm41ZGBlwflnEUhEWYRer50mI0DuRWAp5OHpG0xFnwrsosTLFZpjVJRgVS8v8AXGBD3GqaNgqiKEikmTRDnRRw22/6Paz9Dzfy9h7np7h7/wBKodfxA/4xicrMsTlUAo1BAByqCzpugOhE0hgYtza1ZVCCsFGlvGKjAUUYcr1qZKjmL+DwhRJIConEvjNQvxg/4xi0lmWJyqEUaggA5VKU03QHQiaQsSLc2tX/AKPaz//Z" alt="Product dashboard listing conversation themes discovered across calls, each with a volume sparkline, call count and share of total.">
@@ -713,6 +1083,111 @@
             предлагать уже отвергнутые идеи.
           </p>
         </div>
+
+        <figure class="t-en">
+         <div class="frame frame--diagram">
+          <svg viewBox="0 0 880 292" role="img" aria-label="Architecture: an agentic loop proposes, compiles and falsifies hypotheses against training and validation data, while the sealed lockbox is crossed exactly once.">
+          <defs>
+           <marker id="ar2en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor" fill-opacity=".5"/></marker>
+           <marker id="aa2en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--accent)"/></marker>
+           <marker id="ag2en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--verified)"/></marker>
+           <marker id="ab2en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--refuted)"/></marker>
+          </defs>
+
+          <rect class="dgm-box" x="30" y="40" width="210" height="54" rx="3"/>
+          <text class="dgm-t" x="135" y="64" text-anchor="middle">LLM proposes a hypothesis</text>
+          <text class="dgm-s" x="135" y="81" text-anchor="middle">with stated reasoning</text>
+
+          <rect class="dgm-box" x="300" y="40" width="210" height="54" rx="3"/>
+          <text class="dgm-t" x="405" y="64" text-anchor="middle">DSL compiles it</text>
+          <text class="dgm-s" x="405" y="81" text-anchor="middle">structured output &#8594; signal</text>
+
+          <rect class="dgm-box" x="300" y="190" width="210" height="54" rx="3"/>
+          <text class="dgm-t" x="405" y="214" text-anchor="middle">Falsifier</text>
+          <text class="dgm-s" x="405" y="231" text-anchor="middle">train + validation</text>
+
+          <rect class="dgm-box" x="30" y="190" width="210" height="54" rx="3"/>
+          <text class="dgm-t" x="135" y="214" text-anchor="middle">Verdict memory</text>
+          <text class="dgm-s" x="135" y="231" text-anchor="middle">fed back into the prompt</text>
+
+          <line class="dgm-l" x1="240" y1="67" x2="292" y2="67" marker-end="url(#ar2en)"/>
+          <line class="dgm-l" x1="405" y1="94" x2="405" y2="184" marker-end="url(#ar2en)"/>
+          <line class="dgm-l" x1="300" y1="217" x2="248" y2="217" marker-end="url(#ar2en)"/>
+          <text class="dgm-lab" x="270" y="209" text-anchor="middle">verdict</text>
+          <line class="dgm-l" x1="135" y1="190" x2="135" y2="102" marker-end="url(#ar2en)"/>
+          <text class="dgm-lab" x="145" y="150">already rejected</text>
+
+          <text class="dgm-n dgm-s" x="290" y="141" text-anchor="middle">82 hypotheses</text>
+          <text class="dgm-n dgm-bad" x="290" y="160" text-anchor="middle">0 survived</text>
+
+          <path class="dgm-l dgm-l--ghost" d="M580 26 V194 M580 212 V286"/>
+          <text class="dgm-k" x="580" y="18" text-anchor="middle">SEAL</text>
+
+          <line class="dgm-l" x1="510" y1="217" x2="642" y2="217" marker-end="url(#ar2en)"/>
+          <text class="dgm-lab" x="576" y="206" text-anchor="middle">opened once, at the end</text>
+
+          <rect class="dgm-box" x="650" y="190" width="200" height="54" rx="3"/>
+          <text class="dgm-t" x="750" y="214" text-anchor="middle">Sealed lockbox</text>
+          <text class="dgm-s" x="750" y="231" text-anchor="middle">never touched during search</text>
+
+          <text class="dgm-n dgm-good" x="405" y="274" text-anchor="middle">train 1.19 · validation 1.40</text>
+          <text class="dgm-n dgm-bad" x="750" y="274" text-anchor="middle">lockbox &#8722;1.75</text>
+          </svg>
+         </div>
+         <figcaption>Everything on the left of the seal was looked at repeatedly — which is exactly how a holdout quietly turns into training data. The lockbox is crossed once, and it is the only number in the picture that was not selected on.</figcaption>
+        </figure>
+        <figure class="t-ru">
+         <div class="frame frame--diagram">
+          <svg viewBox="0 0 880 292" role="img" aria-label="Архитектура: агентный цикл предлагает, компилирует и фальсифицирует гипотезы на обучении и валидации, а запечатанный тест пересекается ровно один раз.">
+          <defs>
+           <marker id="ar2ru" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor" fill-opacity=".5"/></marker>
+           <marker id="aa2ru" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--accent)"/></marker>
+           <marker id="ag2ru" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--verified)"/></marker>
+           <marker id="ab2ru" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--refuted)"/></marker>
+          </defs>
+
+          <rect class="dgm-box" x="30" y="40" width="210" height="54" rx="3"/>
+          <text class="dgm-t" x="135" y="64" text-anchor="middle">LLM предлагает гипотезу</text>
+          <text class="dgm-s" x="135" y="81" text-anchor="middle">с обоснованием</text>
+
+          <rect class="dgm-box" x="300" y="40" width="210" height="54" rx="3"/>
+          <text class="dgm-t" x="405" y="64" text-anchor="middle">DSL компилирует</text>
+          <text class="dgm-s" x="405" y="81" text-anchor="middle">structured output &#8594; сигнал</text>
+
+          <rect class="dgm-box" x="300" y="190" width="210" height="54" rx="3"/>
+          <text class="dgm-t" x="405" y="214" text-anchor="middle">Фальсификатор</text>
+          <text class="dgm-s" x="405" y="231" text-anchor="middle">обучение + валидация</text>
+
+          <rect class="dgm-box" x="30" y="190" width="210" height="54" rx="3"/>
+          <text class="dgm-t" x="135" y="214" text-anchor="middle">Память вердиктов</text>
+          <text class="dgm-s" x="135" y="231" text-anchor="middle">подмешивается в промпт</text>
+
+          <line class="dgm-l" x1="240" y1="67" x2="292" y2="67" marker-end="url(#ar2ru)"/>
+          <line class="dgm-l" x1="405" y1="94" x2="405" y2="184" marker-end="url(#ar2ru)"/>
+          <line class="dgm-l" x1="300" y1="217" x2="248" y2="217" marker-end="url(#ar2ru)"/>
+          <text class="dgm-lab" x="270" y="209" text-anchor="middle">вердикт</text>
+          <line class="dgm-l" x1="135" y1="190" x2="135" y2="102" marker-end="url(#ar2ru)"/>
+          <text class="dgm-lab" x="145" y="150">уже отвергнутое</text>
+
+          <text class="dgm-n dgm-s" x="290" y="141" text-anchor="middle">82 гипотезы</text>
+          <text class="dgm-n dgm-bad" x="290" y="160" text-anchor="middle">0 выжило</text>
+
+          <path class="dgm-l dgm-l--ghost" d="M580 26 V194 M580 212 V286"/>
+          <text class="dgm-k" x="580" y="18" text-anchor="middle">ПЕЧАТЬ</text>
+
+          <line class="dgm-l" x1="510" y1="217" x2="642" y2="217" marker-end="url(#ar2ru)"/>
+          <text class="dgm-lab" x="576" y="206" text-anchor="middle">вскрыт один раз, в конце</text>
+
+          <rect class="dgm-box" x="650" y="190" width="200" height="54" rx="3"/>
+          <text class="dgm-t" x="750" y="214" text-anchor="middle">Запечатанный тест</text>
+          <text class="dgm-s" x="750" y="231" text-anchor="middle">во время поиска не трогали</text>
+
+          <text class="dgm-n dgm-good" x="405" y="274" text-anchor="middle">обучение 1.19 · валидация 1.40</text>
+          <text class="dgm-n dgm-bad" x="750" y="274" text-anchor="middle">lockbox &#8722;1.75</text>
+          </svg>
+         </div>
+         <figcaption>Всё слева от печати просматривалось многократно — именно так отложенная выборка тихо становится обучающей. Печать пересекается один раз, и это единственное число на схеме, по которому ничего не отбиралось.</figcaption>
+        </figure>
       </article>
 
       <article class="entry">
@@ -786,6 +1261,105 @@
             </p>
           </div>
         </div>
+
+        <figure class="t-en">
+         <div class="frame frame--diagram">
+          <svg viewBox="0 62 880 206" role="img" aria-label="Architecture: a single voice agent talks to the caller while a Cloudflare Worker owns all date arithmetic and returns slots already phrased for speech.">
+          <defs>
+           <marker id="ar3en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor" fill-opacity=".5"/></marker>
+           <marker id="aa3en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--accent)"/></marker>
+           <marker id="ag3en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--verified)"/></marker>
+           <marker id="ab3en" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--refuted)"/></marker>
+          </defs>
+
+          <rect class="dgm-box" x="30" y="100" width="140" height="56" rx="3"/>
+          <text class="dgm-t" x="100" y="126" text-anchor="middle">Prospect</text>
+          <text class="dgm-s" x="100" y="143" text-anchor="middle">two-minute call, RU</text>
+
+          <line class="dgm-l" x1="176" y1="128" x2="242" y2="128" marker-end="url(#ar3en)"/>
+          <text class="dgm-lab" x="209" y="120" text-anchor="middle">speech</text>
+          <line class="dgm-l" x1="242" y1="150" x2="176" y2="150" marker-end="url(#ar3en)"/>
+          <text class="dgm-lab" x="209" y="166" text-anchor="middle">voice back</text>
+
+          <rect class="dgm-box" x="250" y="88" width="240" height="80" rx="3"/>
+          <text class="dgm-t" x="370" y="116" text-anchor="middle">ElevenLabs Agent</text>
+          <text class="dgm-s" x="370" y="134" text-anchor="middle">ASR &#8594; LLM &#8594; TTS</text>
+          <text class="dgm-s" x="370" y="152" text-anchor="middle">one agent, no handoffs</text>
+
+          <line class="dgm-l dgm-l--accent" x1="490" y1="116" x2="592" y2="116" marker-end="url(#aa3en)"/>
+          <text class="dgm-lab dgm-acc" x="541" y="108" text-anchor="middle">tool call</text>
+          <line class="dgm-l dgm-l--accent" x1="592" y1="150" x2="490" y2="150" marker-end="url(#aa3en)"/>
+          <text class="dgm-lab dgm-acc" x="592" y="186" text-anchor="end">ready-to-speak strings</text>
+
+          <rect class="dgm-box" x="600" y="88" width="250" height="80" rx="3"/>
+          <text class="dgm-t" x="725" y="118" text-anchor="middle">Cloudflare Worker</text>
+          <text class="dgm-s" x="725" y="136" text-anchor="middle">owns the calendar</text>
+          <text class="dgm-s" x="725" y="154" text-anchor="middle">books the slot</text>
+
+          <line class="dgm-l dgm-l--ghost" x1="725" y1="168" x2="725" y2="182"/>
+          <rect class="dgm-box--ghost" x="600" y="184" width="250" height="76" rx="4"/>
+          <text class="dgm-n dgm-f" x="616" y="207">&#183; today&#8217;s date</text>
+          <text class="dgm-n dgm-f" x="616" y="227">&#183; the next working days</text>
+          <text class="dgm-n dgm-f" x="616" y="247">&#183; each slot, already spoken</text>
+
+          <line class="dgm-l dgm-l--ghost" x1="370" y1="168" x2="370" y2="208"/>
+          <path class="dgm-l dgm-l--bad" d="M363 181 L377 193 M377 181 L363 193"/>
+          <text class="dgm-lab dgm-bad" x="356" y="191" text-anchor="end">never happens</text>
+          <rect class="dgm-box--ghost" x="250" y="210" width="240" height="46" rx="3"/>
+          <text class="dgm-f" x="370" y="238" text-anchor="middle">date arithmetic inside the model</text>
+          </svg>
+         </div>
+         <figcaption>The model never computes a date. The worker hands it the day, the working days and every slot already phrased for speech, so the agent only reads — which removes a whole class of errors and leaves enough headroom to run a faster, cheaper model.</figcaption>
+        </figure>
+        <figure class="t-ru">
+         <div class="frame frame--diagram">
+          <svg viewBox="0 62 880 206" role="img" aria-label="Архитектура: один голосовой агент говорит с человеком, а воркер на Cloudflare владеет всей работой с датами и отдаёт слоты уже в озвученной форме.">
+          <defs>
+           <marker id="ar3ru" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor" fill-opacity=".5"/></marker>
+           <marker id="aa3ru" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--accent)"/></marker>
+           <marker id="ag3ru" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--verified)"/></marker>
+           <marker id="ab3ru" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="var(--refuted)"/></marker>
+          </defs>
+
+          <rect class="dgm-box" x="30" y="100" width="140" height="56" rx="3"/>
+          <text class="dgm-t" x="100" y="126" text-anchor="middle">Клиент</text>
+          <text class="dgm-s" x="100" y="143" text-anchor="middle">разговор две минуты</text>
+
+          <line class="dgm-l" x1="176" y1="128" x2="242" y2="128" marker-end="url(#ar3ru)"/>
+          <text class="dgm-lab" x="209" y="120" text-anchor="middle">речь</text>
+          <line class="dgm-l" x1="242" y1="150" x2="176" y2="150" marker-end="url(#ar3ru)"/>
+          <text class="dgm-lab" x="209" y="166" text-anchor="middle">голос обратно</text>
+
+          <rect class="dgm-box" x="250" y="88" width="240" height="80" rx="3"/>
+          <text class="dgm-t" x="370" y="116" text-anchor="middle">ElevenLabs Agent</text>
+          <text class="dgm-s" x="370" y="134" text-anchor="middle">ASR &#8594; LLM &#8594; TTS</text>
+          <text class="dgm-s" x="370" y="152" text-anchor="middle">один агент, без передач</text>
+
+          <line class="dgm-l dgm-l--accent" x1="490" y1="116" x2="592" y2="116" marker-end="url(#aa3ru)"/>
+          <text class="dgm-lab dgm-acc" x="541" y="108" text-anchor="middle">tool call</text>
+          <line class="dgm-l dgm-l--accent" x1="592" y1="150" x2="490" y2="150" marker-end="url(#aa3ru)"/>
+          <text class="dgm-lab dgm-acc" x="592" y="186" text-anchor="end">готовые строки для озвучки</text>
+
+          <rect class="dgm-box" x="600" y="88" width="250" height="80" rx="3"/>
+          <text class="dgm-t" x="725" y="118" text-anchor="middle">Cloudflare Worker</text>
+          <text class="dgm-s" x="725" y="136" text-anchor="middle">владеет календарём</text>
+          <text class="dgm-s" x="725" y="154" text-anchor="middle">бронирует слот</text>
+
+          <line class="dgm-l dgm-l--ghost" x1="725" y1="168" x2="725" y2="182"/>
+          <rect class="dgm-box--ghost" x="600" y="184" width="250" height="76" rx="4"/>
+          <text class="dgm-n dgm-f" x="616" y="207">&#183; текущая дата</text>
+          <text class="dgm-n dgm-f" x="616" y="227">&#183; ближайшие рабочие дни</text>
+          <text class="dgm-n dgm-f" x="616" y="247">&#183; каждый слот, уже словами</text>
+
+          <line class="dgm-l dgm-l--ghost" x1="370" y1="168" x2="370" y2="208"/>
+          <path class="dgm-l dgm-l--bad" d="M363 181 L377 193 M377 181 L363 193"/>
+          <text class="dgm-lab dgm-bad" x="356" y="191" text-anchor="end">не происходит</text>
+          <rect class="dgm-box--ghost" x="250" y="210" width="240" height="46" rx="3"/>
+          <text class="dgm-f" x="370" y="238" text-anchor="middle">вычисление даты внутри модели</text>
+          </svg>
+         </div>
+         <figcaption>Модель никогда не считает дату. Воркер отдаёт ей день, ближайшие рабочие дни и каждый слот уже проговорённым, поэтому агент только читает — это разом убирает целый класс ошибок и оставляет запас, которого хватает более быстрой и дешёвой модели.</figcaption>
+        </figure>
         <p class="note">
           <span class="t-en">
             Delivered with an explicit list of what was left undone — synthetic slots, no CRM
